@@ -39,7 +39,7 @@ taiex_mid100_stocks = [
 with ThreadPoolExecutor() as executor:
     results = list(executor.map(fetch_stock_data, taiex_mid100_stocks))
 try:
-    workbook = openpyxl.load_workbook("C:/Users/user/Desktop/財資管/taiex_mid100_stock_data.xlsx")
+    workbook = openpyxl.load_workbook("C:/Users/user/Desktop/-morning/taiex_mid100_stock_data.xlsx")
 except FileNotFoundError:
     workbook = openpyxl.Workbook()
 
@@ -65,5 +65,5 @@ for i, result in enumerate(results, start=2):
     sheet[f"E{i}"] = result[4]
     sheet[f"F{i}"] = result[5]
 
-workbook.save("C:/Users/user/Desktop/財資管/taiex_mid100_stock_data.xlsx")
-open_and_close_excel("C:/Users/user/Desktop/財資管/taiex_mid100_stock_data.xlsx")
+workbook.save("C:/Users/user/Desktop/-morning/taiex_mid100_stock_data.xlsx")
+open_and_close_excel("C:/Users/user/Desktop/-morning/taiex_mid100_stock_data.xlsx")
