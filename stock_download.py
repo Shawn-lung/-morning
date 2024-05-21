@@ -14,7 +14,7 @@ def open_and_close_excel(file_path):
 def fetch_stock_data(stock_code):
     stock = yf.Ticker(stock_code)
     stock_info = stock.info
-    return stock_code, stock_info.get('trailingEps'), stock_info.get('beta'), stock_info.get('forwardPE'), stock_info.get('returnOnEquity'), stock_info.get('returnOnAssets')
+    return stock_code, stock_info.get('trailingEps', 'NaN'), stock_info.get('beta', 'NaN'), stock_info.get('forwardPE', 'NaN'), stock_info.get('returnOnEquity', 'NaN'), stock_info.get('returnOnAssets', 'NaN')
 # 定義臺灣中型100指數的成分股列表
 taiex_mid100_stocks = [
     "2330.TW", "2317.TW", "2454.TW", "1301.TW", "2882.TW", "2881.TW", 
@@ -35,11 +35,13 @@ taiex_mid100_stocks = [
     "4736.TW", "4743.TW"
 ]
 
+file_path = "C:/Users/user/Desktop/-morning/taiex_mid100_stock_data.xlsx"
+
 
 with ThreadPoolExecutor() as executor:
     results = list(executor.map(fetch_stock_data, taiex_mid100_stocks))
 try:
-    workbook = openpyxl.load_workbook("C:/Users/user/Desktop/-morning/taiex_mid100_stock_data.xlsx")
+    workbook = openpyxl.load_workbook(file_path)
 except FileNotFoundError:
     workbook = openpyxl.Workbook()
 
@@ -65,5 +67,5 @@ for i, result in enumerate(results, start=2):
     sheet[f"E{i}"] = result[4]
     sheet[f"F{i}"] = result[5]
 
-workbook.save("C:/Users/user/Desktop/-morning/taiex_mid100_stock_data.xlsx")
-open_and_close_excel("C:/Users/user/Desktop/-morning/taiex_mid100_stock_data.xlsx")
+workbook.save(file_path)
+open_and_close_excel(file_path)
