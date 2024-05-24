@@ -3,6 +3,8 @@ import yfinance as yf
 from concurrent.futures import ThreadPoolExecutor
 import subprocess
 import os
+import requests
+import pandas as pd
 
 def open_and_close_excel(file_path):
     try:
@@ -36,7 +38,14 @@ taiex_mid100_stocks = [
     "4736.TW", "4743.TW"
 ]
 
+
 file_path = os.path.join(os.getcwd(), "taiex_mid100_stock_data.xlsx")
+
+res = requests.get("https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y")
+df = pd.read_html(res.text)[0][2]
+df.to_csv(os.path.join(os.getcwd(),"tw_stock_codes.csv"), index=False)
+
+
 
 with ThreadPoolExecutor() as executor:
     results = list(executor.map(fetch_stock_data, taiex_mid100_stocks))
