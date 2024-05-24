@@ -2,6 +2,7 @@ import openpyxl
 import yfinance as yf
 from concurrent.futures import ThreadPoolExecutor
 import subprocess
+import os
 
 def open_and_close_excel(file_path):
     try:
@@ -35,8 +36,7 @@ taiex_mid100_stocks = [
     "4736.TW", "4743.TW"
 ]
 
-file_path = "C:/Users/user/Desktop/-morning/taiex_mid100_stock_data.xlsx"
-
+file_path = os.path.join(os.getcwd(), "taiex_mid100_stock_data.xlsx")
 
 with ThreadPoolExecutor() as executor:
     results = list(executor.map(fetch_stock_data, taiex_mid100_stocks))
