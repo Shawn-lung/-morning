@@ -3,8 +3,10 @@ import yfinance as yf
 from concurrent.futures import ThreadPoolExecutor
 import subprocess
 import os
-import requests
 import pandas as pd
+
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
 def open_and_close_excel(file_path):
     try:
@@ -20,9 +22,9 @@ def fetch_stock_data(stock_code):
     return stock_code, stock_info.get('trailingEps', 'NaN'), stock_info.get('beta', 'NaN'), stock_info.get('forwardPE', 'NaN'), stock_info.get('returnOnEquity', 'NaN'), stock_info.get('returnOnAssets', 'NaN')
 
 
-file_path = os.path.join(os.getcwd(), "taiex_mid100_stock_data.xlsx")
+file_path = os.path.join(current_dir, "taiex_mid100_stock_data.xlsx")
 
-with open(os.path.join(os.getcwd(), "tw_stock_codes.txt"), 'r') as file:
+with open(os.path.join(current_dir, "tw_stock_codes.txt"), 'r') as file:
     lines= file.read().splitlines()
 taiex_mid100_stocks = [line + ".TW" for line in lines]
 
