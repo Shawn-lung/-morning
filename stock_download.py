@@ -4,6 +4,7 @@ from concurrent.futures import ThreadPoolExecutor
 import subprocess
 import os
 import pandas as pd
+import numpy as np
 
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -15,11 +16,18 @@ def open_and_close_excel(file_path):
     except Exception as e:
         print(f"Error: {e}")
 
-
 def fetch_stock_data(stock_code):
     stock = yf.Ticker(stock_code)
     stock_info = stock.info
-    return stock_code, stock_info.get('trailingEps', 'NaN'), stock_info.get('beta', 'NaN'), stock_info.get('forwardPE', 'NaN'), stock_info.get('returnOnEquity', 'NaN'), stock_info.get('returnOnAssets', 'NaN')
+    trailingEps = stock_info.get('trailingEps', np.nan)
+    beta = stock_info.get('beta', np.nan)
+    forwardPE = stock_info.get('forwardPE', np.nan)
+    returnOnEquity = stock_info.get('returnOnEquity', np.nan)
+    returnOnAssets = stock_info.get('returnOnAssets', np.nan)
+    grossProfit = stock_info.get('Gross Profit',np.nan)
+    totalRevenue = stock_info.get('Total Revenue',np.nan)
+    rtnList = [stock_code, trailingEps, beta, forwardPE, returnOnEquity, returnOnAssets, grossProfit/totalRevenue]
+    return rtnList
 
 
 file_path = os.path.join(current_dir, "taiex_mid100_stock_data.xlsx")
@@ -49,6 +57,7 @@ sheet["C1"] = "Beta"
 sheet["D1"] = "PE Ratio"
 sheet["E1"] = "ROE"
 sheet["F1"] = "ROA"
+sheet["G1"] = "Gross margin"
 
 for i, result in enumerate(results, start=2):
     sheet[f"A{i}"] = result[0]
@@ -57,6 +66,7 @@ for i, result in enumerate(results, start=2):
     sheet[f"D{i}"] = result[3]
     sheet[f"E{i}"] = result[4]
     sheet[f"F{i}"] = result[5]
+    sheet[f"G{i}"] = result[6]
 
 workbook.save(file_path)
 open_and_close_excel(file_path)
