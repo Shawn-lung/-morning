@@ -24,16 +24,20 @@ def fetch_stock_data(stock_code):
     forwardPE = stock_info.get('forwardPE', np.nan)
     returnOnEquity = stock_info.get('returnOnEquity', np.nan)
     returnOnAssets = stock_info.get('returnOnAssets', np.nan)
-    grossProfit = stock_info.get('Gross Profit',np.nan)
-    totalRevenue = stock_info.get('Total Revenue',np.nan)
-    rtnList = [stock_code, trailingEps, beta, forwardPE, returnOnEquity, returnOnAssets, grossProfit/totalRevenue]
+    grossMargin = stock_info.get('grossMargins', np.nan)
+    operatingMargin = stock_info.get('operatingMargins', np.nan)
+    peRatio = stock_info.get('trailingPE', np.nan)
+    pbRatio = stock_info.get('priceToBook', np.nan)
+    revenuePerShare = stock_info.get('revenuePerShare', np.nan)
+    rtnList = [stock_code, trailingEps, beta, forwardPE, returnOnEquity, returnOnAssets, grossMargin, operatingMargin, peRatio, pbRatio, revenuePerShare]
+    print(rtnList)
     return rtnList
 
 
 file_path = os.path.join(current_dir, "taiex_mid100_stock_data.xlsx")
 
 with open(os.path.join(current_dir, "tw_stock_codes.txt"), 'r') as file:
-    lines= file.read().splitlines()
+    lines = file.read().splitlines()
 taiex_mid100_stocks = [line + ".TW" for line in lines]
 
 
@@ -58,6 +62,10 @@ sheet["D1"] = "PE Ratio"
 sheet["E1"] = "ROE"
 sheet["F1"] = "ROA"
 sheet["G1"] = "Gross margin"
+sheet["H1"] = "Operating margin"
+sheet["I1"] = "P/E Ratio"
+sheet["J1"] = "P/B Ratio"
+sheet["K1"] = "Revenue per share"
 
 for i, result in enumerate(results, start=2):
     sheet[f"A{i}"] = result[0]
@@ -67,6 +75,11 @@ for i, result in enumerate(results, start=2):
     sheet[f"E{i}"] = result[4]
     sheet[f"F{i}"] = result[5]
     sheet[f"G{i}"] = result[6]
+    sheet[f"H{i}"] = result[7]
+    sheet[f"I{i}"] = result[8]
+    sheet[f"J{i}"] = result[9]
+    sheet[f"K{i}"] = result[10]
 
 workbook.save(file_path)
 open_and_close_excel(file_path)
+
