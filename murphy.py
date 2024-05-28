@@ -9,7 +9,7 @@ weights_range = [1/9, 1/8, 1/7, 1/6, 1/5, 1/4, 1/3, 1/2, 1, 2, 3, 4, 5, 6, 7, 8,
 
 # Murphy 初始準則
 murphy_initial_criteria = {
-    ('Normalized ROE', 'Normalized Operating Margin'): 3
+    ('Normalized ROE', 'Normalized Operating Margin'): 2
 }
 
 initial_weights = list(murphy_initial_criteria.values())
