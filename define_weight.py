@@ -9,13 +9,13 @@ weights_range = [1/9, 1/8, 1/7, 1/6, 1/5, 1/4, 1/3, 1/2, 1, 2, 3, 4, 5, 6, 7, 8,
 
 
 initial_criteria = {
-    ('Normalized ROE', 'Normalized EPS'): 5,
-    ('Normalized ROE', 'Normalized Gross Margin'): 7,
-    ('Normalized ROE', 'Normalized Revenue per Share'): 6,
-    ('Normalized ROE', 'Normalized PB Ratio'): 8,
-    ('Normalized EPS', 'Normalized Gross Margin'): 5,
-    ('Normalized EPS', 'Normalized Revenue per Share'): 5,
-    ('Normalized EPS', 'Normalized PB Ratio'): 6,
+    ('Normalized ROE', 'Normalized EPS'): 1,
+    ('Normalized ROE', 'Normalized Gross Margin'): 2,
+    ('Normalized ROE', 'Normalized Revenue per Share'): 2,
+    ('Normalized ROE', 'Normalized PB Ratio'): 2,
+    ('Normalized EPS', 'Normalized Gross Margin'): 2,
+    ('Normalized EPS', 'Normalized Revenue per Share'): 2,
+    ('Normalized EPS', 'Normalized PB Ratio'): 3,
     ('Normalized Gross Margin', 'Normalized Revenue per Share'): 1,
     ('Normalized Gross Margin', 'Normalized PB Ratio'): 2,
     ('Normalized Revenue per Share', 'Normalized PB Ratio'): 2
