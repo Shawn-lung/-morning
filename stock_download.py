@@ -82,4 +82,3 @@ for i, result in enumerate(results, start=2):
 
 workbook.save(file_path)
 open_and_close_excel(file_path)
-
