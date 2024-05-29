@@ -8,11 +8,10 @@ class StockDownloader:
     def __init__(self, stock_list_file, output_file):
         self.stock_list_file = stock_list_file
         self.output_file = output_file
-        self.current_dir = os.path.dirname(os.path.abspath(__file__))
         self.stock_codes = self._load_stock_codes()
 
     def _load_stock_codes(self):
-        with open(os.path.join(self.current_dir, self.stock_list_file), 'r') as file:
+        with open(self.stock_list_file, 'r') as file:
             lines = file.read().splitlines()
         return [line + ".TW" for line in lines]
 
@@ -33,6 +32,11 @@ class StockDownloader:
         print(rtnList)
         return rtnList
 
+    def _clear_sheet(self, sheet):
+        for row in sheet.iter_rows(min_row=2, max_row=sheet.max_row, min_col=1, max_col=sheet.max_column):
+            for cell in row:
+                cell.value = None
+
     def download_data(self):
         with ThreadPoolExecutor() as executor:
             results = list(executor.map(self._fetch_stock_data, self.stock_codes))
@@ -46,6 +50,7 @@ class StockDownloader:
             sheet = workbook.create_sheet(sheet_name)
         else:
             sheet = workbook[sheet_name]
+            self._clear_sheet(sheet)  
 
         sheet["A1"] = "股票代碼"
         sheet["B1"] = "EPS"

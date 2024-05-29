@@ -9,23 +9,18 @@ class StockScorer:
         self.df = None
 
     def load_data(self):
-        # 读取Excel文件到DataFrame
         self.df = pd.read_excel(self.input_file, sheet_name="Sheet")
         print(f"Initial rows: {len(self.df)}")
 
     def preprocess_data(self):
         required_columns = ["EPS", "Beta", "PE Ratio", "ROE", "Gross margin", "P/B Ratio", "Revenue per share", "Operating margin"]
-        nan_counts = self.df[required_columns].isna().sum()
-        print("NaN counts per column before dropping rows:")
-        print(nan_counts)
-        
-        columns_to_check = ["EPS", "ROE", "Gross margin", "P/B Ratio", "Revenue per share", "Operating margin"]
-        self.df = self.df.dropna(subset=columns_to_check)
+        self.df = self.df.dropna(subset=required_columns)
+
         print(f"Rows after dropping NaNs: {len(self.df)}")
 
         for col in required_columns:
             self.df[col] = pd.to_numeric(self.df[col], errors='coerce')
-        print(f"Rows after converting to numeric: {len(self.df)}")
+
 
     def normalize_data(self):
         normalized_columns = {
@@ -49,11 +44,11 @@ class StockScorer:
     def calculate_scores(self):
         def buffet_score(row):
             weights = {
-                'Normalized_ROE': 0.575,
-                'Normalized_EPS': 0.2462,
-                'Normalized_Gross_margin': 0.0695,
-                'Normalized_Revenue_per_share': 0.0669,
-                'Normalized_PB_Ratio': 0.0424
+                'Normalized_ROE': 0.2808,
+                'Normalized_EPS': 0.3004,
+                'Normalized_Gross_margin': 0.16,
+                'Normalized_Revenue_per_share': 0.16,
+                'Normalized_PB_Ratio': 0.0988
             }
             return (row['Normalized_ROE'] * weights['Normalized_ROE'] +
                     row['Normalized_EPS'] * weights['Normalized_EPS'] +
@@ -100,10 +95,6 @@ class StockScorer:
             }
             return (row['Normalized_ROE'] * weights['Normalized_ROE'] +
                     row['Normalized_Operating_margin'] * weights['Normalized_Operating_margin'])
-
-        # Debug信息，确保列存在
-        print("Columns before applying scores:")
-        print(self.df.columns)
 
         self.df['Buffet Score'] = self.df.apply(buffet_score, axis=1)
         self.df['Graham Score'] = self.df.apply(graham_score, axis=1)
