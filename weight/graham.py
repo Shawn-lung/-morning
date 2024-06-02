@@ -11,7 +11,7 @@ weights_range = [1/9, 1/8, 1/7, 1/6, 1/5, 1/4, 1/3, 1/2, 1, 2, 3, 4, 5, 6, 7, 8,
 graham_initial_criteria = {
     ('Normalized PE Ratio', 'Normalized PB Ratio'): 1,
     ('Normalized PE Ratio', 'Normalized EPS'): 1/3,
-    ('Normalized PB Ratio', 'Normalized EPS'): 1/3
+    ('Normalized PB Ratio', 'Normalized EPS'): 1/3,
 }
 
 initial_weights = list(graham_initial_criteria.values())
