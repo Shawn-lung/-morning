@@ -9,9 +9,9 @@ weights_range = [1/9, 1/8, 1/7, 1/6, 1/5, 1/4, 1/3, 1/2, 1, 2, 3, 4, 5, 6, 7, 8,
 
 # O'Shaughnessy 初始準則
 oshaughnessy_initial_criteria = {
-    ('Normalized EPS', 'Normalized PE Ratio'): 3,
-    ('Normalized EPS', 'Normalized ROE'): 5,
-    ('Normalized PE Ratio', 'Normalized ROE'): 3
+    ('Normalized EPS', 'Normalized PE Ratio'): 5,
+    ('Normalized EPS', 'Normalized ROE'): 3,
+    ('Normalized PE Ratio', 'Normalized ROE'): 1/3
 }
 
 initial_weights = list(oshaughnessy_initial_criteria.values())
