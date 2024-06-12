@@ -7,8 +7,7 @@ from deap import base, creator, tools, algorithms
 # 初始化權重範圍和初始準則
 weights_range = [1/9, 1/8, 1/7, 1/6, 1/5, 1/4, 1/3, 1/2, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-
-initial_criteria = {
+buffet_criteria = {
     ('Normalized ROE', 'Normalized EPS'): 1,
     ('Normalized ROE', 'Normalized Gross Margin'): 2,
     ('Normalized ROE', 'Normalized Revenue per Share'): 2,
