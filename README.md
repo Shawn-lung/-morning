@@ -58,33 +58,23 @@ The project translates the investment philosophies of celebrated investors into 
 
 - **Buffet Strategy:**  
   Emphasizes ROE, EPS, Gross Margin, and Revenue per Share while penalizing a high P/B Ratio.  
-  \[
-  \text{Buffet Score} = 0.2808 \times \text{Normalized ROE} + 0.3004 \times \text{Normalized EPS} + 0.16 \times \text{Normalized Gross Margin} + 0.16 \times \text{Normalized Revenue per Share} - 0.0988 \times \text{Normalized P/B Ratio}
-  \]
+  ![Buffet_score](./img/Buffet_Score.png)
 
 - **Graham Strategy:**  
   Focuses on low PE and P/B ratios along with EPS.  
-  \[
-  \text{Graham Score} = 0.4286 \times \text{Normalized PE Ratio} + 0.4286 \times \text{Normalized P/B Ratio} + 0.1429 \times \text{Normalized EPS}
-  \]
+  ![Graham_score](./img/Graham_Score.png)
 
 - **O'Shaughnessy Strategy:**  
   Prioritizes EPS and ROE, with a lesser weight on PE Ratio.  
-  \[
-  \text{O'Shaughnessy Score} = 0.637 \times \text{Normalized EPS} + 0.2583 \times \text{Normalized PE Ratio} + 0.1047 \times \text{Normalized ROE}
-  \]
+  ![O'Shaughnessy_score](./img/O'Shaughnessy_Score.png)
 
 - **Lynch Strategy:**  
   Balances PE Ratio, Revenue per Share, and Gross Margin while reducing the impact of a high P/B Ratio.  
-  \[
-  \text{Lynch Score} = 0.5825 \times \text{Normalized PE Ratio} + 0.2362 \times \text{Normalized Revenue per Share} + 0.0789 \times \text{Normalized Gross Margin} - 0.1024 \times \text{Normalized P/B Ratio}
-  \]
+  ![Lynch_score](./img/Lynch_Score.png)
 
 - **Murphy Strategy:**  
   Combines ROE and Operating Margin to deliver an overall performance score.  
-  \[
-  \text{Murphy Score} = 0.6132 \times \text{Normalized ROE} + 0.5868 \times \text{Normalized Operating Margin}
-  \]
+  ![Murphy_score](./img/Murphy_Score.png)
 
 These formulas are further optimized by a Python genetic algorithm that fine-tunes the weights based on historical data and consistency criteria, ensuring that the scores accurately reflect the underlying investment philosophy.
 
